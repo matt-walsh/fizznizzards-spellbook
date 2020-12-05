@@ -1,10 +1,11 @@
 const net = require('net');
+
 //-100 from port due to foreman dynamically changing ports for processes of different types.
 const port = process.env.PORT ? (process.env.PORT - 100) : 3000; 
 
 process.env.ELECTRON_START_URL = `http://localhost:${port}`;
 
-//Use a socket to test for connection to express server
+//Use a socket to test for connection to react server
 const client = new net.Socket();
 
 let startedElectron = false;
