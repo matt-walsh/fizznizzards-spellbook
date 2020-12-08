@@ -1,0 +1,79 @@
+/* Remove Arrow/Spinner from Numerical Input box - W3Schools*/
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number] { 
+    -moz-appearance: textfield;
+    appearance: textfield;
+    margin: 0; 
+  }
+
+  /* Show spinner on focus */
+  input::-webkit-outer-spin-button:focus,
+input::-webkit-inner-spin-button:focus {
+  -webkit-appearance: auto;
+  margin: 0;
+}
+
+/* Firefox */
+input[type=number]:focus { 
+    -moz-appearance: auto;
+    appearance: auto;
+    margin: 0; 
+  }
+
+.left-bar, .right-bar{
+    background-color: #5A2F80;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+h2{
+    font-size: 13pt;
+}
+
+button{
+    margin-bottom: 10px;
+    background-color: rgba(0,0,0,0);
+    border: 1px solid black;
+    width: 65px;
+    height: 65px;
+}
+
+.spell-counter{
+    box-sizing: border-box;
+    padding-left: 10px;
+    padding-right: 10px;
+    margin-bottom: 10px;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    max-width: 65px;
+    border: 1px solid black;
+}
+
+.spell-counter input{
+    margin: 1px;
+    padding: 0px;
+    text-align: center;
+    background-color:  #F29618;
+    border: none;
+}
+
+.spell-counter label{
+    font-weight: 400;
+}
+
+/* Spell Button Backgrounds */
+#add-spell{
+    background-image: url("../media/icons/newspell.svg");
+}
+
+#show-all{
+    background-image: url("../media/icons/showall.svg");
+}

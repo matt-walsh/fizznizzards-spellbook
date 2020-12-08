@@ -1,5 +1,5 @@
 // Modules to control application life and create native browser window
-const {app, BrowserWindow} = require('electron')
+const {app, BrowserWindow, Menu} = require('electron')
 const path = require('path')
 
 const reactURL = process.env.ELECTRON_START_URL || url.format({
@@ -13,10 +13,14 @@ function createWindow () {
   const mainWindow = new BrowserWindow({
     width: 800,
     height: 600,
+    minWidth: 600,
+    minHeight:  200,
     webPreferences: {
       preload: path.join(__dirname, 'preload.js')
     }
   })
+  //Start Maximized
+  mainWindow.maximize();
 
   // and load the index.html of the app.
   mainWindow.loadURL(reactURL)
@@ -47,3 +51,23 @@ app.on('window-all-closed', function () {
 
 // In this file you can include the rest of your app's specific main process
 // code. You can also put them in separate files and require them here.
+//Debug Menu
+const debugMenu = [
+  {
+    label: "&Debug",
+    click(){mainWindow.webContents.openDevTools();}
+  },
+  {
+    role: 'reload'
+  },
+  {
+    label: "Refresh Data",
+    click(){
+      
+    }
+  }
+];
+
+//Add Menu from template
+let menu = Menu.buildFromTemplate(debugMenu);
+Menu.setApplicationMenu(menu);

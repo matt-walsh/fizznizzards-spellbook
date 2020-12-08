@@ -1,0 +1,12 @@
+.footer{
+    background-color: #5A2F80;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+span{
+    color: #B31733;
+    padding-top: 2em;
+}
