@@ -10,7 +10,7 @@ class NavBar extends React.Component{
         return(
             <header className="header">
                 <h1>Fizz Nizzard's Spell Book</h1>
-                <label for="searchBar">Search <input type="text" id="searchBar"/></label>
+                <label htmlFor="searchBar">Search <input type="text" id="searchBar"/></label>
                 
             </header>
         )
