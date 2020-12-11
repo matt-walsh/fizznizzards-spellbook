@@ -1,20 +1,14 @@
 import React from 'react';
-import '../css/NavBar.css'
+import '../css/Header.css'
 
-class NavBar extends React.Component{
-    constructor(props){
-        super(props);
-    }
+const Header = (props) =>{
 
-    render(){
-        return(
-            <header className="header">
-                <h1>Fizz Nizzard's Spell Book</h1>
-                <label htmlFor="searchBar">Search <input type="text" id="searchBar"/></label>
-                
-            </header>
-        )
-    }
+    return(
+        <header className="header">
+            <h1>Fizz Nizzard's Spell Book</h1>
+        </header>
+    )
+    
 }
 
-export default NavBar
+export default Header

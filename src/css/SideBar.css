@@ -12,8 +12,8 @@ input[type=number] {
     margin: 0; 
   }
 
-  /* Show spinner on focus */
-  input::-webkit-outer-spin-button:focus,
+/* Show spinner on focus */
+input::-webkit-outer-spin-button:focus,
 input::-webkit-inner-spin-button:focus {
   -webkit-appearance: auto;
   margin: 0;
@@ -35,45 +35,70 @@ input[type=number]:focus {
 
 h2{
     font-size: 13pt;
+    text-align: center;
 }
 
-button{
-    margin-bottom: 10px;
-    background-color: rgba(0,0,0,0);
-    border: 1px solid black;
-    width: 65px;
-    height: 65px;
+.bar-button{
+  background-image: url("../media/icons/spellicon.svg");
+  background-size: 100% 100%;
+  background-color: #F29618;
+  font-size: 16pt;
+  color: #F29618;
+  width: 65px;
+  height: 65px;
+  margin-bottom: 10px;
+  border: 1px solid black;
+  border-radius: 5pt;
+  -webkit-box-shadow: 5px 5px 15px -7px #000000; 
+  box-shadow: 5px 5px 15px -7px #000000;
+
+}
+
+.bar-button:active{
+  background-position: 1px 1px;
+}
+
+.bar-button:focus{
+  outline: none;
+}
+
+.selected{
+  border: 3px solid #B31733;
 }
 
 .spell-counter{
-    box-sizing: border-box;
-    padding-left: 10px;
-    padding-right: 10px;
-    margin-bottom: 10px;
-    display: flex;
-    flex-direction: column;
-    text-align: center;
-    max-width: 65px;
-    border: 1px solid black;
+  background-color: #F29618;
+  box-sizing: border-box;
+  padding-left: 10px;
+  padding-right: 10px;
+  margin-bottom: 10px;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  width: 65px;
+  height: 65px;
+  border: 1px solid black;
+  border-radius: 5pt;
+  -webkit-box-shadow: -5px 5px 15px -7px #000000; 
+  box-shadow: -5px 5px 15px -7px #000000;
 }
 
 .spell-counter input{
-    margin: 1px;
-    padding: 0px;
-    text-align: center;
-    background-color:  #F29618;
-    border: none;
-}
-
-.spell-counter label{
-    font-weight: 400;
+  margin: 1px;
+  padding: 0px;
+  text-align: center;
+  font-weight: 700;
+  background-color:  #B31733;
+  color:#F29618;
+  border: none;
 }
 
 /* Spell Button Backgrounds */
 #add-spell{
-    background-image: url("../media/icons/newspell.svg");
+  background-image: url("../media/icons/newspell.svg");
 }
 
 #show-all{
-    background-image: url("../media/icons/showall.svg");
+  background-image: url("../media/icons/showall.svg");
 }
+  

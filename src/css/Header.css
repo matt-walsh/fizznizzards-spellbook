@@ -7,4 +7,8 @@
 
 h1{
     font-size: 26pt;
+    padding: 0px;
+
+    margin-block-start: 0px;
+    margin-block-end: 0px;
 }

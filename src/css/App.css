@@ -1,7 +1,7 @@
 .App{
   display: grid;
   grid-template-columns: 7em auto 7em;
-  grid-template-rows: 6.05em auto;
+  grid-template-rows: 10vh 90vh;
 
   grid-template-areas: "head head head"
                        "left-sidebar content right-sidebar"
@@ -13,20 +13,20 @@
 
 .left-bar{
   grid-area: left-sidebar;
+  height: 90vh;
+  
 }
 
 .right-bar{
   grid-area: right-sidebar;
+  height: 90vh;
 }
 
 .content{
+  background-color: #1A52A2;
   grid-area: content;
-
-  display: flex;
-  align-items: start;
-  justify-content: start;
-  flex-wrap: wrap;
   
+  height: 90vh;
   overflow:auto;
 }
 

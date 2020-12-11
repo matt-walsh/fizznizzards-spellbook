@@ -1,6 +1,8 @@
 // Modules to control application life and create native browser window
-const {app, BrowserWindow, Menu} = require('electron')
-const path = require('path')
+const {app, BrowserWindow, Menu, ipcMain} = require('electron');
+const fs = require('fs');
+const path = require('path');
+const reactDevTools = require('electron-react-devtools');
 
 const reactURL = process.env.ELECTRON_START_URL || url.format({
   pathname: path.join(__dirname, '/../build/index.html'),
@@ -8,15 +10,18 @@ const reactURL = process.env.ELECTRON_START_URL || url.format({
   slashes: true
 });
 
+let mainWindow;
+
 function createWindow () {
   // Create the browser window.
-  const mainWindow = new BrowserWindow({
+  mainWindow = new BrowserWindow({
     width: 800,
     height: 600,
     minWidth: 600,
     minHeight:  200,
+    title:"Fizz Nizzard's Spell Book",
     webPreferences: {
-      preload: path.join(__dirname, 'preload.js')
+      nodeIntegration: true
     }
   })
   //Start Maximized
@@ -25,15 +30,30 @@ function createWindow () {
   // and load the index.html of the app.
   mainWindow.loadURL(reactURL)
 
-  // Open the DevTools.
-  // mainWindow.webContents.openDevTools()
+  //Load spells and slots data from file
+  mainWindow.webContents.on('did-finish-load', ()=>{
+    fs.readFile(path.resolve(__dirname, './data/spells.json'), (err, spells) =>{
+      if(err) {
+        mainWindow.webContents.send('error', err);
+      }
+      else{
+        let spellList = JSON.parse(spells);
+        mainWindow.webContents.send('spell:list', spellList);
+      }
+    })
+  })
+
+  //DEBUG MENU
+  let menu = Menu.buildFromTemplate(debugMenu);
+  Menu.setApplicationMenu(menu)
 }
 
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.
 // Some APIs can only be used after this event occurs.
 app.whenReady().then(() => {
-  createWindow()
+  createWindow();
+  session.loadExtension('C:\\Users\\snake\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\Extensions\\fmkadmapgofadopljbjfkapdkoienihi');
   
   app.on('activate', function () {
     // On macOS it's common to re-create a window in the app when the
@@ -51,6 +71,7 @@ app.on('window-all-closed', function () {
 
 // In this file you can include the rest of your app's specific main process
 // code. You can also put them in separate files and require them here.
+
 //Debug Menu
 const debugMenu = [
   {
@@ -59,15 +80,12 @@ const debugMenu = [
   },
   {
     role: 'reload'
-  },
-  {
-    label: "Refresh Data",
-    click(){
-      
-    }
   }
 ];
 
-//Add Menu from template
-let menu = Menu.buildFromTemplate(debugMenu);
-Menu.setApplicationMenu(menu);
+// IPC event "spells:save": Will be received from the render process and contain a full spell list
+ipcMain.on("spells:save", (event, spells)=>{
+  fs.writeFile(path.resolve(__dirname, './data/spells.json'), JSON.stringify(spells), error => {
+
+  });
+});
