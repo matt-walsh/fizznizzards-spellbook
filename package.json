@@ -40,8 +40,7 @@
     ]
   },
   "devDependencies": {
-    "electron": "^11.0.3",
-    "electron-react-devtools": "^0.5.3",
+    "electron": "^11.0.5",
     "foreman": "^3.0.1"
   }
 }

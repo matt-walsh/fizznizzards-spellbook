@@ -2,7 +2,6 @@
 const {app, BrowserWindow, Menu, ipcMain} = require('electron');
 const fs = require('fs');
 const path = require('path');
-const reactDevTools = require('electron-react-devtools');
 
 const reactURL = process.env.ELECTRON_START_URL || url.format({
   pathname: path.join(__dirname, '/../build/index.html'),
@@ -32,15 +31,75 @@ function createWindow () {
 
   //Load spells and slots data from file
   mainWindow.webContents.on('did-finish-load', ()=>{
-    fs.readFile(path.resolve(__dirname, './data/spells.json'), (err, spells) =>{
-      if(err) {
-        mainWindow.webContents.send('error', err);
-      }
-      else{
-        let spellList = JSON.parse(spells);
+    let spellList;
+    let spellSlots;
+    
+    //Access spells.json
+    fs.access(path.resolve(__dirname, './data/spells.json'), fs.constants.F_OK, (error) => {
+      //Spell File does not exist
+      if(error){
+        //Create file with empty array
+        fs.writeFile(path.resolve(__dirname, './data/spells.json'),"[]", error =>{
+          if(error){
+            mainWindow.webContents.send('error', err);
+          }
+        });
+        //apply empty array, stringified, to spellList
+        spellList = JSON.parse('[]');
         mainWindow.webContents.send('spell:list', spellList);
       }
+      //Spell File does exist
+      else{
+        fs.readFile(path.resolve(__dirname, './data/spells.json'), (error, spells) =>{
+          //apply spells stringified to spellList
+          spellList = JSON.parse(spells);
+          mainWindow.webContents.send('spell:list', spellList);
+        })
+      }
     })
+
+    //Access slots.json
+    fs.access(path.resolve(__dirname, './data/slots.json'), fs.constants.F_OK, (error) => {
+      //Slot File does not exist
+      if(error){
+        //Create file with empty array
+        fs.writeFile(path.resolve(__dirname, './data/slots.json'),"[]", error =>{
+          if(error){
+            mainWindow.webContents.send('error', err);
+          }
+        });
+        //apply empty array, stringified, to slotList
+        slotList = JSON.parse('[]');
+        mainWindow.webContents.send('slot:list', slotList);
+      }
+      //Spell File does exist
+      else{
+        fs.readFile(path.resolve(__dirname, './data/slots.json'), (error, slots) =>{
+          //apply spells stringified to spellList
+          slotList = JSON.parse(slots);
+          mainWindow.webContents.send('slot:list', slotList);
+        })
+      }
+    })
+
+    
+
+    // fs.open(path.resolve(__dirname, './data/spells.json'), 'r', (err, spells) =>{
+    //   if(err) {
+    //     mainWindow.webContents.send('error', err);
+    //   }
+    //   mainWindow.webContents.send('error', spells);
+    //   // let spellList = JSON.parse('[]');
+    //   // mainWindow.webContents.send('spell:list', spellList);
+    // });
+
+    // fs.open(path.resolve(__dirname, './data/slots.json'), 'r', (err, slots) =>{
+    //   if(err) {
+    //     mainWindow.webContents.send('error', err);
+    //   }
+    //   let slotList = slots ? JSON.parse(slots) : JSON.parse("[]");
+    //   mainWindow.webContents.send('slot:list', slotList);
+    // })
   })
 
   //DEBUG MENU
@@ -52,9 +111,8 @@ function createWindow () {
 // initialization and is ready to create browser windows.
 // Some APIs can only be used after this event occurs.
 app.whenReady().then(() => {
-  createWindow();
-  session.loadExtension('C:\\Users\\snake\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\Extensions\\fmkadmapgofadopljbjfkapdkoienihi');
-  
+  createWindow();  
+
   app.on('activate', function () {
     // On macOS it's common to re-create a window in the app when the
     // dock icon is clicked and there are no other windows open.
@@ -85,6 +143,13 @@ const debugMenu = [
 
 // IPC event "spells:save": Will be received from the render process and contain a full spell list
 ipcMain.on("spells:save", (event, spells)=>{
+  fs.writeFile(path.resolve(__dirname, './data/spells.json'), JSON.stringify(spells), error => {
+
+  });
+});
+
+// IPC event "slots:save": Will be received from the render process and contain an array of spell slots (current, max, and level)
+ipcMain.on("slots:save", (event, spells)=>{
   fs.writeFile(path.resolve(__dirname, './data/spells.json'), JSON.stringify(spells), error => {
 
   });
