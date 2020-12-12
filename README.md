@@ -3,10 +3,10 @@
 ## About
 Fizz Nizzard the Lizard Wizard has left his spell book lying around. His loss is your gain!\ Use the app to add, update, view and delete the spells in your spell book.
 
-Developed by: Matt Walsh.
+Developed by: [Matt Walsh](https://github.com/matt-walsh).
 
 ## Portfolio Integration
-
+This document is a portfolio piece titled “[Fizz Nizzard’s Spell Book](https://github.com/matt-walsh/fizznizzards-spellbook)” located on the Github account of [Matt Walsh](https://github.com/matt-walsh), the author. 
 ### My Role
 
 My role in this project was all encompassing. I was the project manager, designer, and the designer. As the designer, I used my knowledge of design to create an interface that was intuitive for the user. As the developer, I used my knowledge of HTML, CSS and Javascript to create the design, and implement the functionality. As the project manager, I had to decide how the project was going to be completed, and if features would have to be cut due to time constraint. 

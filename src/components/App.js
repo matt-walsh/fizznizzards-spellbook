@@ -18,7 +18,6 @@ const {ipcRenderer} = window.require("electron");
 
 const App = () => {
   const [spells, setSpells] = useState([]);
-  const [slots, setSlots] = useState([]);
   const [filter, setFilter] = useState("show-all");
 
   //Add a spell
@@ -75,6 +74,8 @@ const App = () => {
   ipcRenderer.on('spell:list', (event, spellList) =>{
     setSpells(spellList);
   })
+
+
   return (
     <React.Fragment>
       <div className="App">
@@ -92,7 +93,7 @@ const App = () => {
               <ShowSpells filter={filter} spells={spells} deleteSpell={deleteSpell} />
             </Route>
           </Switch>
-          <RightBar spellSlots={slots} />
+          <RightBar />
       </Router>
       </div>
     </React.Fragment>

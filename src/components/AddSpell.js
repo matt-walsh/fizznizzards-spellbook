@@ -32,8 +32,23 @@ const AddSpell = (props) =>{
         if(props.checkSpellName(spell.name)){
             alert("Spell already exists. \nPlease choose another name.");
         }
+        //Check for whitespace only name
+        else if(spell.name.trim() === ""){
+            alert("Spell Name cannot be only whitespace \nPlease choose another name.");
+        }
+        else if(spell.level === ""){
+            alert("Spell Level cannot be only whitespace \nPlease choose a level.");
+        }
+        //Check for whitespace only time
+        else if(spell.time.trim() === ""){
+            alert("Casting Time cannot be only whitespace \nPlease enter a valid casting Time.");
+        }
+        //Check for whitespace only source
+        else if(spell.source.trim() === ""){
+            alert("Source cannot be only whitespace \nPlease enter a valid source.")
+        }
         else{
-            //Name is unique, push spell to App
+            //Name is unique, and all validation passed, push spell to App
             props.appendSpell(spell);
             //redirect to root
             history.push('/');

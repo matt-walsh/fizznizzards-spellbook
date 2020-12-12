@@ -15,7 +15,7 @@ function createWindow () {
   // Create the browser window.
   mainWindow = new BrowserWindow({
     width: 800,
-    height: 600,
+    height: 800,
     minWidth: 600,
     minHeight:  200,
     title:"Fizz Nizzard's Spell Book",
@@ -63,13 +63,13 @@ function createWindow () {
       //Slot File does not exist
       if(error){
         //Create file with empty array
-        fs.writeFile(path.resolve(__dirname, './data/slots.json'),"[]", error =>{
+        fs.writeFile(path.resolve(__dirname, './data/slots.json'),"{}", error =>{
           if(error){
             mainWindow.webContents.send('error', err);
           }
         });
         //apply empty array, stringified, to slotList
-        slotList = JSON.parse('[]');
+        slotList = JSON.parse('{}');
         mainWindow.webContents.send('slot:list', slotList);
       }
       //Spell File does exist
@@ -81,25 +81,6 @@ function createWindow () {
         })
       }
     })
-
-    
-
-    // fs.open(path.resolve(__dirname, './data/spells.json'), 'r', (err, spells) =>{
-    //   if(err) {
-    //     mainWindow.webContents.send('error', err);
-    //   }
-    //   mainWindow.webContents.send('error', spells);
-    //   // let spellList = JSON.parse('[]');
-    //   // mainWindow.webContents.send('spell:list', spellList);
-    // });
-
-    // fs.open(path.resolve(__dirname, './data/slots.json'), 'r', (err, slots) =>{
-    //   if(err) {
-    //     mainWindow.webContents.send('error', err);
-    //   }
-    //   let slotList = slots ? JSON.parse(slots) : JSON.parse("[]");
-    //   mainWindow.webContents.send('slot:list', slotList);
-    // })
   })
 
   //DEBUG MENU
@@ -148,9 +129,10 @@ ipcMain.on("spells:save", (event, spells)=>{
   });
 });
 
-// IPC event "slots:save": Will be received from the render process and contain an array of spell slots (current, max, and level)
-ipcMain.on("slots:save", (event, spells)=>{
-  fs.writeFile(path.resolve(__dirname, './data/spells.json'), JSON.stringify(spells), error => {
+// IPC event "slots:save": Will be received from the render process and contain an object of spell slots 
+//(levelXCurrent and levelXMax, where X is the spell level. For each spell level)
+ipcMain.on("slots:save", (event, slots)=>{
+  fs.writeFile(path.resolve(__dirname, './data/slots.json'), JSON.stringify(slots), error => {
 
   });
 });

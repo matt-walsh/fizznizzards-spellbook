@@ -4,7 +4,7 @@ import '../css/Card.css'
 
 const Card = (props) => {
     const history = useHistory();
-    const {spell, deleteSpell, updateSpell} = props;
+    const {spell, deleteSpell} = props;
 
     const handleClick = (event) =>{
         //Get spell name

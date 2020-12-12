@@ -7,7 +7,6 @@ class EditSpell extends React.Component{
     constructor(props){
         super(props);
         this.state = {}
-
     }
 
     componentDidMount() {
@@ -19,10 +18,8 @@ class EditSpell extends React.Component{
         if(currentSpell){
             //Add previousName field to currentSpell (So we know which spell to update)
             currentSpell.previousName = currentSpellName;
-            this.setState(currentSpell, () =>{})
-            
+            this.setState(currentSpell)
         }
-
     }
 
     handleChange = (event) =>{
@@ -43,10 +40,31 @@ class EditSpell extends React.Component{
 
     handleSubmit = (event) =>{
         event.preventDefault();
+        //Check for whitespace only name
+        if(this.state.name.trim() === ""){
+            alert("Spell Name cannot be only whitespace \nPlease choose another name.");
+        }
+        else if(this.state.level === ""){
+            alert("Spell Level cannot be only whitespace \nPlease choose a level.");
+        }
+        //Check for whitespace only time
+        else if(this.state.time.trim() === ""){
+            alert("Casting Time cannot be only whitespace \nPlease enter a valid casting Time.");
+        }
+        //Check for whitespace only source
+        else if(this.state.source.trim() === ""){
+            alert("Source cannot be only whitespace \nPlease enter a valid source.")
+        }
+        else{
+            //Name is unique, and all validation passed, push spell to App
+            this.props.updateSpell(this.state);
+            this.props.history.push('/');
+        }
 
-        this.props.updateSpell(this.state);
+    }
+
+    handleBack = (event) =>{
         this.props.history.push('/');
-
     }
 
     render(){
@@ -98,11 +116,11 @@ class EditSpell extends React.Component{
                     </div>
                     <div className="input-container">
                         <label htmlFor="materials">Materials</label>
-                        <input type="text" name="materials" id="materials" onChange={this.handleChange} value={this.state.time} />
+                        <input type="text" name="materials" id="materials" onChange={this.handleChange} value={this.state.materials} />
                     </div>
                     <div className="input-container">
                         <label htmlFor="source">Source</label>
-                        <input type="text" name="source" id="source" onChange={this.handleChange} value={this.state.time} required/>
+                        <input type="text" name="source" id="source" onChange={this.handleChange} value={this.state.source} required/>
                     </div>
 
                     <div className="input-container">
@@ -111,7 +129,7 @@ class EditSpell extends React.Component{
                     </div>
                     <div className="button-container">
                         <button type="submit" id="save-button">Save</button>
-                        <button type="button" id="clear-button">Back</button>
+                        <button type="button" id="clear-button" onClick={this.handleBack}>Back</button>
                     </div>
                 </form>
             </section>               
