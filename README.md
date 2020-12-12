@@ -41,7 +41,7 @@ My initial solution was to use `npm start`, wait for the React server to start, 
 
 This issue allowed me to explore the capabilities of the Node runtime. It was one of many that allowed me to understand the underlying power of many of our tools. Working with and around issues, for me, is the best way of learning. I believe, now, I have gained a slight glimpse into what is possible using Node and Javascript.
 
-## Getting Started
+# Getting Started
 
 ## Running in Dev
 
