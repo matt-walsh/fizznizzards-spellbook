@@ -45,9 +45,10 @@ This issue allowed me to explore the capabilities of the Node runtime. It was on
 
 ### Running in Dev
 
-`npm run dev`
-Runs the app in the development mode.\
-The page will reload if you make edits. You will also see any lint errors in the console.\
+Before you begin, remember to run `npm install` to download all dependencies.
+
+`npm run dev`\
+Runs the app in the development mode. The page will reload if you make any code edits. You will also see any lint errors in the console.\
 Because app relies on data from electron backend, the browser window that launches is unusable.
 
 ### Available Scripts
