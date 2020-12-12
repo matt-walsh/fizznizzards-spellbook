@@ -41,20 +41,20 @@ My initial solution was to use `npm start`, wait for the React server to start, 
 
 This issue allowed me to explore the capabilities of the Node runtime. It was one of many that allowed me to understand the underlying power of many of our tools. Working with and around issues, for me, is the best way of learning. I believe, now, I have gained a slight glimpse into what is possible using Node and Javascript.
 
-# Getting Started
+## Getting Started
 
-## Running in Dev
+### Running in Dev
 
-### `npm run dev`
+`npm run dev`
 Runs the app in the development mode.\
 The page will reload if you make edits. You will also see any lint errors in the console.\
 Because app relies on data from electron backend, the browser window that launches is unusable.
 
-## Available Scripts
+### Available Scripts
 
 In the project directory, you can run:
 
-### `npm run build`
+`npm run build`
 
 This only builds the react app, which, as mentioned above, still requires an electron backend.\
 Builds the app for production to the `build` folder. It correctly bundles React in production mode and optimizes the build for the best performance.
